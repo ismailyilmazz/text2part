@@ -1,0 +1,32 @@
+{
+  "id": "N12",
+  "description": "Corner inset smaller than the hole radius",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      },
+      "holes": [
+        {
+          "diameter": 6,
+          "depth": "through",
+          "placement": {
+            "kind": "corners",
+            "inset": 2
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R1"
+    ]
+  }
+}

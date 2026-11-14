@@ -1,0 +1,49 @@
+{
+  "id": "N17",
+  "description": "Hole closer to a pocket than the minimum wall",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            0,
+            0
+          ],
+          "length": 30,
+          "width": 20,
+          "depth": 5,
+          "corner_radius": 3
+        }
+      ],
+      "holes": [
+        {
+          "diameter": 5,
+          "depth": "through",
+          "placement": {
+            "kind": "explicit",
+            "centers": [
+              [
+                17.8,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R7"
+    ]
+  }
+}

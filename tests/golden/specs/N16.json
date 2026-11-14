@@ -1,0 +1,35 @@
+{
+  "id": "N16",
+  "description": "Grid with more holes than the limit",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 2000,
+        "width": 2000,
+        "height": 5
+      },
+      "holes": [
+        {
+          "diameter": 4,
+          "depth": "through",
+          "placement": {
+            "kind": "grid",
+            "nx": 15,
+            "ny": 15,
+            "pitch_x": 20,
+            "pitch_y": 20
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R9"
+    ]
+  }
+}

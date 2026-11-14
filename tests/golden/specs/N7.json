@@ -1,0 +1,23 @@
+{
+  "id": "N7",
+  "description": "Body corner radius equal to half of the width",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      },
+      "corner_radius": 20
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R6"
+    ]
+  }
+}

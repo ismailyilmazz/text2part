@@ -1,0 +1,11 @@
+{
+  "id": "N19",
+  "description": "Empty proposal",
+  "proposal": {},
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "EMPTY"
+    ]
+  }
+}

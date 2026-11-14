@@ -1,0 +1,41 @@
+{
+  "id": "N2",
+  "description": "Two overlapping holes",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      },
+      "holes": [
+        {
+          "diameter": 6,
+          "depth": "through",
+          "placement": {
+            "kind": "explicit",
+            "centers": [
+              [
+                0,
+                0
+              ],
+              [
+                4,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R2"
+    ]
+  }
+}

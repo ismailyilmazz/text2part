@@ -1,0 +1,21 @@
+{
+  "id": "P2",
+  "description": "Plain plate 100x50x3",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 100,
+        "width": 50,
+        "height": 3
+      }
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": []
+  }
+}

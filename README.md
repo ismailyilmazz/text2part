@@ -4,7 +4,7 @@ Text-to-CAD part generation for FreeCAD.
 
 ## Setup
 
-Python 3.11 or 3.12.
+Python 3.11, 3.12 or 3.13.
 
 ```bash
 python -m venv .venv

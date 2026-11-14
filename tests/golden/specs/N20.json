@@ -1,0 +1,33 @@
+{
+  "id": "N20",
+  "description": "Pocket too close to the body outline",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            20,
+            0
+          ],
+          "length": 20,
+          "width": 10,
+          "depth": 5
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R4"
+    ]
+  }
+}

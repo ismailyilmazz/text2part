@@ -1,0 +1,41 @@
+{
+  "id": "P4",
+  "description": "Block 50x30x20 with one blind hole of 8 mm, 10 mm deep, at the center",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 50,
+        "width": 30,
+        "height": 20
+      },
+      "holes": [
+        {
+          "diameter": 8,
+          "depth": 10,
+          "placement": {
+            "kind": "explicit",
+            "centers": [
+              [
+                0,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": [
+      [
+        0,
+        0
+      ]
+    ]
+  }
+}

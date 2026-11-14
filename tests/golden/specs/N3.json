@@ -1,0 +1,37 @@
+{
+  "id": "N3",
+  "description": "Blind hole deeper than the plate",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      },
+      "holes": [
+        {
+          "diameter": 6,
+          "depth": 6,
+          "placement": {
+            "kind": "explicit",
+            "centers": [
+              [
+                0,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "R3"
+    ]
+  }
+}

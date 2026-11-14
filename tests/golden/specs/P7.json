@@ -1,0 +1,55 @@
+{
+  "id": "P7",
+  "description": "Plate 120x20x4 with a row of five 4 mm through holes at 22 mm pitch",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 120,
+        "width": 20,
+        "height": 4
+      },
+      "holes": [
+        {
+          "diameter": 4,
+          "depth": "through",
+          "placement": {
+            "kind": "grid",
+            "nx": 5,
+            "ny": 1,
+            "pitch_x": 22,
+            "pitch_y": 22
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": [
+      [
+        -44,
+        0
+      ],
+      [
+        -22,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        22,
+        0
+      ],
+      [
+        44,
+        0
+      ]
+    ]
+  }
+}

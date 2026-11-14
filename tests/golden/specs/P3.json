@@ -1,0 +1,60 @@
+{
+  "id": "P3",
+  "description": "Plate 80x80x8 with 5 mm corner radius and a 3x2 grid of 5 mm through holes at 20 mm pitch",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 80,
+        "width": 80,
+        "height": 8
+      },
+      "corner_radius": 5,
+      "holes": [
+        {
+          "diameter": 5,
+          "depth": "through",
+          "placement": {
+            "kind": "grid",
+            "nx": 3,
+            "ny": 2,
+            "pitch_x": 20,
+            "pitch_y": 20
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": [
+      [
+        -20,
+        -10
+      ],
+      [
+        -20,
+        10
+      ],
+      [
+        0,
+        -10
+      ],
+      [
+        0,
+        10
+      ],
+      [
+        20,
+        -10
+      ],
+      [
+        20,
+        10
+      ]
+    ]
+  }
+}

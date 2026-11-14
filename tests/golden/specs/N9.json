@@ -1,0 +1,28 @@
+{
+  "id": "N9",
+  "description": "Counterbored hole requested",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      }
+    },
+    "unsupported": [
+      {
+        "feature": "counterbore",
+        "detail": "M6 counterbore at the center"
+      }
+    ]
+  },
+  "expected": {
+    "status": "UNSUPPORTED",
+    "codes": [
+      "U_DECLARED"
+    ]
+  }
+}

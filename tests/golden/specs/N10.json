@@ -1,0 +1,30 @@
+{
+  "id": "N10",
+  "description": "Ambiguous M6 hole: clearance or tapped",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      }
+    },
+    "questions": [
+      {
+        "id": "m6_hole_type",
+        "text": "Should the M6 hole be a clearance hole for a bolt or a tapped hole?",
+        "options": [
+          "Clearance hole",
+          "Tapped hole"
+        ]
+      }
+    ]
+  },
+  "expected": {
+    "status": "NEEDS_ANSWER",
+    "codes": []
+  }
+}

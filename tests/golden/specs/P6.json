@@ -1,0 +1,60 @@
+{
+  "id": "P6",
+  "description": "Block 60x40x15 with the P5 pocket and four 5 mm through holes outside the pocket",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            0,
+            0
+          ],
+          "length": 30,
+          "width": 20,
+          "depth": 5,
+          "corner_radius": 3
+        }
+      ],
+      "holes": [
+        {
+          "diameter": 5,
+          "depth": "through",
+          "placement": {
+            "kind": "corners",
+            "inset": 6
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": [
+      [
+        24,
+        14
+      ],
+      [
+        -24,
+        14
+      ],
+      [
+        24,
+        -14
+      ],
+      [
+        -24,
+        -14
+      ]
+    ]
+  }
+}

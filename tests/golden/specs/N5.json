@@ -1,0 +1,22 @@
+{
+  "id": "N5",
+  "description": "Inch units",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "inch",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      }
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "SCHEMA"
+    ]
+  }
+}

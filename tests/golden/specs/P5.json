@@ -1,0 +1,33 @@
+{
+  "id": "P5",
+  "description": "Block 60x40x15 with a centered 30x20 pocket, 5 mm deep, 3 mm corner radius",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            0,
+            0
+          ],
+          "length": 30,
+          "width": 20,
+          "depth": 5,
+          "corner_radius": 3
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": []
+  }
+}

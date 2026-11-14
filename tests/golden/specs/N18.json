@@ -1,0 +1,22 @@
+{
+  "id": "N18",
+  "description": "Number given as a string",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": "60",
+        "width": 40,
+        "height": 5
+      }
+    }
+  },
+  "expected": {
+    "status": "INVALID",
+    "codes": [
+      "SCHEMA"
+    ]
+  }
+}

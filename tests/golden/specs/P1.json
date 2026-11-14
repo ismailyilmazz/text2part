@@ -1,0 +1,48 @@
+{
+  "id": "P1",
+  "description": "Plate 60x40x5 with four through holes of 6 mm at the corners, inset 6 mm",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "plate",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 5
+      },
+      "holes": [
+        {
+          "diameter": 6,
+          "depth": "through",
+          "placement": {
+            "kind": "corners",
+            "inset": 6
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "VALID",
+    "codes": [],
+    "hole_centers": [
+      [
+        24,
+        14
+      ],
+      [
+        -24,
+        14
+      ],
+      [
+        24,
+        -14
+      ],
+      [
+        -24,
+        -14
+      ]
+    ]
+  }
+}

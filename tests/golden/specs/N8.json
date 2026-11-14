@@ -1,0 +1,49 @@
+{
+  "id": "N8",
+  "description": "Hole intersecting a pocket",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            0,
+            0
+          ],
+          "length": 30,
+          "width": 20,
+          "depth": 5,
+          "corner_radius": 3
+        }
+      ],
+      "holes": [
+        {
+          "diameter": 5,
+          "depth": "through",
+          "placement": {
+            "kind": "explicit",
+            "centers": [
+              [
+                15,
+                0
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "UNSUPPORTED",
+    "codes": [
+      "U_HOLE_IN_POCKET"
+    ]
+  }
+}

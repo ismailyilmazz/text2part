@@ -1,0 +1,34 @@
+{
+  "id": "N4",
+  "description": "Pocket as deep as the body",
+  "proposal": {
+    "spec": {
+      "schema_version": "1.0",
+      "units": "mm",
+      "family": "block",
+      "body": {
+        "length": 60,
+        "width": 40,
+        "height": 15
+      },
+      "pockets": [
+        {
+          "center": [
+            0,
+            0
+          ],
+          "length": 30,
+          "width": 20,
+          "depth": 15,
+          "corner_radius": 3
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "UNSUPPORTED",
+    "codes": [
+      "U_THROUGH_POCKET"
+    ]
+  }
+}
