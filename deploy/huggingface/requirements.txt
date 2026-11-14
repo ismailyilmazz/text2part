@@ -1,2 +1,2 @@
 torch==2.11.0
-text2part @ git+https://github.com/ismailyilmazz/text2part.git@main
+text2part @ git+https://github.com/ismailyilmazz/text2part.git@f3f2a4d0ca49e1de667669526542289422642d9b
