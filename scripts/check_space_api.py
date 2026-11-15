@@ -10,6 +10,14 @@ DEFAULT_URL = "https://ismailylmz283-text2part.hf.space"
 ENDPOINTS = ("env_report", "gpu_probe")
 
 
+class RefuseRedirects(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise urllib.error.HTTPError(req.full_url, code, "redirect refused", headers, fp)
+
+
+OPENER = urllib.request.build_opener(RefuseRedirects)
+
+
 def parse_sse(lines):
     event = None
     for raw in lines:
@@ -32,10 +40,10 @@ def call_endpoint(base_url: str, api_name: str, data: list, token: str | None = 
     headers = build_headers(token)
     body = json.dumps({"data": data}).encode("utf-8")
     request = urllib.request.Request(url, data=body, headers=headers, method="POST")
-    with urllib.request.urlopen(request, timeout=timeout) as response:
+    with OPENER.open(request, timeout=timeout) as response:
         event_id = json.load(response)["event_id"]
     request = urllib.request.Request(f"{url}/{event_id}", headers=headers)
-    with urllib.request.urlopen(request, timeout=timeout) as response:
+    with OPENER.open(request, timeout=timeout) as response:
         lines = (raw.decode("utf-8") for raw in response)
         for event, payload in parse_sse(lines):
             if event == "complete":
