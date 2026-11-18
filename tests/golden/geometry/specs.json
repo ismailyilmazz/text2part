@@ -1,0 +1,62 @@
+{
+  "GS": {
+    "schema_version": "1.0",
+    "units": "mm",
+    "family": "block",
+    "body": {
+      "length": 2000.0,
+      "width": 1500.0,
+      "height": 40.0
+    },
+    "corner_radius": 20.0,
+    "holes": [
+      {
+        "diameter": 12.0,
+        "depth": "through",
+        "placement": {
+          "kind": "grid",
+          "nx": 5,
+          "ny": 4,
+          "pitch_x": 300.0,
+          "pitch_y": 300.0,
+          "center": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "pockets": [],
+    "manufacturing_tolerance": null
+  },
+  "GT": {
+    "schema_version": "1.0",
+    "units": "mm",
+    "family": "block",
+    "body": {
+      "length": 400.0,
+      "width": 400.0,
+      "height": 10.0
+    },
+    "corner_radius": 0.0,
+    "holes": [
+      {
+        "diameter": 8.0,
+        "depth": "through",
+        "placement": {
+          "kind": "grid",
+          "nx": 10,
+          "ny": 10,
+          "pitch_x": 36.0,
+          "pitch_y": 36.0,
+          "center": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "pockets": [],
+    "manufacturing_tolerance": null
+  }
+}

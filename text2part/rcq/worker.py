@@ -7,6 +7,8 @@ from text2part.rcq.ir import Chain, New, Program, RcqError, Ref, Vec, decode_pro
 
 RESULT_FILE = "result.json"
 SHAPE_FILE = "shape.brep"
+STEP_FILE = "part.step"
+LOG_FILE = "stderr.log"
 HEADROOM_BYTES = 32 * 1024**2
 MEMORY_HINTS = ("MemoryError", "bad_alloc", "OutOfMemory", "allocate memory", "failed to map segment")
 
@@ -150,6 +152,23 @@ def write_shape(shape: object, path: Path, limit: int) -> None:
         raise RcqError("execute", "export_failed", "The shape could not be written.")
 
 
+def check_part(spec_data: dict, shape: object, folder: Path) -> dict:
+    from text2part.core.export import ExportError, write_step
+    from text2part.core.spec import Spec
+    from text2part.core.verify import verify
+
+    cadquery = load_cadquery()
+    report = verify(Spec.model_validate(spec_data), shape)
+    if report.translation is not None:
+        moved = shape.Solids()[0].translate(cadquery.Vector(*report.translation))
+        try:
+            write_step(moved, folder / STEP_FILE)
+        except ExportError as error:
+            code = "resource_limit" if error.too_large else "export_failed"
+            raise RcqError("execute", code, str(error)) from None
+    return report.as_dict()
+
+
 def has_headroom() -> bool:
     try:
         bytearray(HEADROOM_BYTES)
@@ -170,7 +189,10 @@ def main() -> None:
         shape = evaluate(decode_program(request["program"]))
         summary = summarize(shape)
         write_shape(shape, folder / SHAPE_FILE, int(request["limits"]["output_bytes"]))
-        respond(folder, {"ok": True, **summary})
+        payload = {"ok": True, **summary}
+        if request.get("spec") is not None:
+            payload["report"] = check_part(request["spec"], shape, folder)
+        respond(folder, payload)
     except MemoryError:
         respond(folder, {"ok": False, "error": memory_error.as_dict()})
     except RcqError as error:

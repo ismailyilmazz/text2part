@@ -10,7 +10,7 @@ from pathlib import Path
 
 from text2part.rcq.grammar import ENABLED, check_program
 from text2part.rcq.ir import Program, RcqError, encode_program
-from text2part.rcq.worker import RESULT_FILE, SHAPE_FILE, looks_like_memory
+from text2part.rcq.worker import LOG_FILE, RESULT_FILE, SHAPE_FILE, STEP_FILE, looks_like_memory
 
 PACKAGE_ROOT = str(Path(__file__).resolve().parents[2])
 BOOTSTRAP = "import sys; sys.path.insert(0, sys.argv[1]); from text2part.rcq.worker import main; main()"
@@ -31,6 +31,8 @@ WINDOWS_ENVIRONMENT = (
 )
 ERROR_TAIL_BYTES = 2000
 MAX_RESULT_BYTES = 64 * 1024
+MAX_STEP_BYTES = 10 * 1024**2
+ALLOWED_FILES = frozenset({RESULT_FILE, SHAPE_FILE, STEP_FILE, LOG_FILE})
 SIGNAL_MESSAGES = {
     int(number): message
     for number, message in (
@@ -60,6 +62,8 @@ class Execution:
     volume: float = 0.0
     bbox: tuple | None = None
     seconds: float = 0.0
+    report: dict | None = None
+    step: bytes | None = None
 
 
 def child_environment() -> dict:
@@ -80,13 +84,16 @@ def read_tail(path: Path) -> str:
     return data[-ERROR_TAIL_BYTES:].decode("utf-8", "replace")
 
 
-def run_program(program: Program, limits: Limits = Limits(), enabled: frozenset = ENABLED) -> Execution:
+def run_program(
+    program: Program, limits: Limits = Limits(), enabled: frozenset = ENABLED, spec: object = None
+) -> Execution:
     check_program(program, enabled)
-    request = json.dumps({"limits": asdict(limits), "program": encode_program(program)})
+    spec_data = spec.model_dump(mode="json") if spec is not None else None
+    request = json.dumps({"limits": asdict(limits), "program": encode_program(program), "spec": spec_data})
     started = time.perf_counter()
     with tempfile.TemporaryDirectory(prefix="text2part-", ignore_cleanup_errors=True) as name:
         folder = Path(name)
-        log = folder / "stderr.log"
+        log = folder / LOG_FILE
         command = [sys.executable, "-I", "-c", BOOTSTRAP, PACKAGE_ROOT, name]
         try:
             with open(log, "wb") as stderr:
@@ -102,6 +109,10 @@ def run_program(program: Program, limits: Limits = Limits(), enabled: frozenset 
         except subprocess.TimeoutExpired:
             return failure("resource_limit", "Wall clock limit exceeded.", time.perf_counter() - started)
         seconds = time.perf_counter() - started
+        unexpected = sorted(entry.name for entry in folder.iterdir() if entry.name not in ALLOWED_FILES)
+        if unexpected:
+            names = ", ".join(name[:40] for name in unexpected[:5])
+            return failure("worker_error", f"The worker left unexpected files: {names}.", seconds)
         result = folder / RESULT_FILE
         if not result.is_file():
             tail = read_tail(log)
@@ -126,8 +137,16 @@ def run_program(program: Program, limits: Limits = Limits(), enabled: frozenset 
             shape = folder / SHAPE_FILE
             if shape.stat().st_size > limits.output_bytes:
                 return failure("resource_limit", "Output size limit exceeded.", seconds)
+            report = payload.get("report")
+            step = None
+            if report is not None and (folder / STEP_FILE).is_file():
+                if (folder / STEP_FILE).stat().st_size > MAX_STEP_BYTES:
+                    return failure("resource_limit", "Output size limit exceeded.", seconds)
+                step = (folder / STEP_FILE).read_bytes()
             return Execution(
                 ok=True,
+                report=report if isinstance(report, dict) else None,
+                step=step,
                 brep=shape.read_bytes(),
                 solids=int(payload["solids"]),
                 valid=bool(payload["valid"]),

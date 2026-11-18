@@ -86,7 +86,11 @@ def load_brep():
 
 @pytest.fixture(scope="session")
 def symmetric_difference():
+    from text2part.core.verify import compare
+
     def measure(first, second):
-        return first.cut(second).Volume() + second.cut(first).Volume()
+        comparison = compare(first, second)
+        assert comparison.reliable, comparison.reason
+        return comparison.difference
 
     return measure

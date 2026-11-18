@@ -68,3 +68,5 @@ jobs:
         run: python scripts/stress_builder.py
       - name: RCQ zorlama testi
         run: python scripts/stress_rcq.py
+      - name: Doğrulama kalibrasyonu
+        run: python scripts/calibrate_verify.py
