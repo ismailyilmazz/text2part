@@ -198,7 +198,9 @@ def test_main_sends_the_token_only_to_the_approved_address(capsys, monkeypatch):
     opener = FakeOpener()
     monkeypatch.setattr(check_space_api, "OPENER", opener)
     assert main(["--url", APPROVED_URL, "--token", TOKEN]) == 0
-    report = json.loads(capsys.readouterr().out)
+    output = capsys.readouterr().out
+    assert TOKEN not in output
+    report = json.loads(output)
     assert report["token_withheld"] is False
     assert [entry["authenticated"] for entry in report["summary"]] == [True, True, False, False]
     assert all(request.full_url.startswith(APPROVED_URL + "/gradio_api/call/") for request in opener.requests)
